@@ -1,0 +1,447 @@
+/* =====================================================================
+   Personal Workspace : Notion 다크 테마 (2026-09-06)
+   개인 워크스페이스의 다크 모드 레이어.
+   demodev 토큰과 컴포넌트 위에 마지막으로 얹힌다.
+   ===================================================================== */
+
+:root {
+  color-scheme: dark;
+
+  /* Notion 다크 팔레트 (실물 기준) */
+  --nt-bg: #191919;
+  --nt-surface: #202020;
+  --nt-card: #232323;
+  --nt-raised: #2A2A2A;
+  --nt-hover: rgba(255, 255, 255, 0.055);
+  --nt-active: rgba(255, 255, 255, 0.09);
+  --nt-divider: rgba(255, 255, 255, 0.094);
+  --nt-divider-solid: #2E2E2E;
+  --nt-text: #D4D4D4;
+  --nt-text-strong: #EDEDEB;
+  --nt-text-soft: #B8B8B5;
+  --nt-muted: #9B9B98;
+  --nt-faint: #6F6F6C;
+  --nt-input: rgba(255, 255, 255, 0.055);
+  --nt-blue: #2383E2;
+  --nt-blue-hover: #1B6DC1;
+  --nt-blue-soft: rgba(35, 131, 226, 0.22);
+  --nt-red: #FF7369;
+  --nt-green: #4DAB9A;
+  --nt-orange: #FFA344;
+  --nt-shadow-pop: rgba(0, 0, 0, 0.2) 0 0 0 1px, rgba(0, 0, 0, 0.4) 0 6px 18px, rgba(0, 0, 0, 0.5) 0 16px 40px;
+
+  /* Notion 다크 태그 팔레트 */
+  --nt-tag-gray-bg: #3F3F3F;   --nt-tag-gray-fg: #E3E3E1;
+  --nt-tag-blue-bg: #28456C;   --nt-tag-blue-fg: #CBE2F7;
+  --nt-tag-green-bg: #244D36;  --nt-tag-green-fg: #D1EDDC;
+  --nt-tag-yellow-bg: #59452C; --nt-tag-yellow-fg: #F7E5C0;
+  --nt-tag-orange-bg: #5C3B23; --nt-tag-orange-fg: #FADEC9;
+  --nt-tag-red-bg: #5E2B29;    --nt-tag-red-fg: #FFD5D0;
+  --nt-tag-purple-bg: #3D2E55; --nt-tag-purple-fg: #E4D5F5;
+  --nt-tag-pink-bg: #532B41;   --nt-tag-pink-fg: #F2C7DC;
+  --nt-tag-brown-bg: #453028;  --nt-tag-brown-fg: #E0CFC5;
+
+  /* demodev 토큰 재매핑 (다크 반전) */
+  --color-accent-500: var(--nt-blue);
+  --color-accent-600: var(--nt-blue-hover);
+  --color-accent-300: #4A7FB5;
+  --color-accent-50: var(--nt-blue-soft);
+  --color-common-black: var(--nt-text-strong);
+  /* --color-common-white는 surface와 텍스트 양쪽에 쓰여서 변수 재매핑 대신
+     아래에서 surface 사용처만 직접 덮는다 */
+  --color-gray-50: #242424;
+  --color-gray-100: var(--nt-raised);
+  --color-gray-200: var(--nt-divider-solid);
+  --color-gray-300: #3F3F3F;
+  --color-gray-400: var(--nt-faint);
+  --color-gray-500: var(--nt-muted);
+  --color-gray-600: var(--nt-text-soft);
+  --color-gray-700: var(--nt-text);
+  --color-gray-900: var(--nt-text-strong);
+  --foreground: var(--nt-text);
+  --background: var(--nt-bg);
+}
+
+html { background: var(--nt-bg); }
+body {
+  color: var(--nt-text);
+  background: var(--nt-bg);
+}
+
+::selection { background: var(--nt-blue-soft); }
+* { scrollbar-color: #3F3F3F transparent; }
+
+/* ---- 카드: 어두운 면 + 헤어라인 ---- */
+.card {
+  border-radius: 8px;
+  border: 1px solid var(--nt-divider);
+  box-shadow: none;
+  background: var(--nt-card);
+  transition: border-color 180ms cubic-bezier(0.4, 0, 0.2, 1), background 180ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.hover-lift:hover {
+  transform: none;
+  border-color: rgba(255, 255, 255, 0.16);
+  background: #262626;
+  box-shadow: none;
+}
+
+/* ---- 버튼 ---- */
+.btn { border-radius: 6px; font-weight: 500; letter-spacing: 0; }
+.btn--primary { background: var(--nt-blue); border-color: var(--nt-blue); color: #fff; }
+.btn--primary:hover { background: var(--nt-blue-hover); border-color: var(--nt-blue-hover); }
+.btn--primary:disabled { background: #2E4A66; border-color: #2E4A66; color: rgba(255,255,255,0.5); }
+.btn--secondary {
+  background: transparent;
+  border: 1px solid var(--nt-divider);
+  color: var(--nt-text);
+  box-shadow: none;
+}
+.btn--secondary:hover { background: var(--nt-hover); }
+.btn--tertiary { color: var(--nt-muted); background: transparent; }
+.btn--tertiary:hover { background: var(--nt-hover); color: var(--nt-text-strong); }
+
+/* ---- 입력 ---- */
+.input {
+  background: var(--nt-input);
+  border: 1px solid transparent;
+  border-radius: 6px;
+  box-shadow: rgba(255, 255, 255, 0.08) 0 0 0 1px inset;
+  color: var(--nt-text);
+}
+.input::placeholder { color: var(--nt-faint); }
+.input:focus {
+  background: rgba(255, 255, 255, 0.03);
+  box-shadow: 0 0 0 1px var(--nt-blue) inset, rgba(35, 131, 226, 0.35) 0 0 0 2px;
+  outline: none;
+}
+select.input { background-color: var(--nt-surface); }
+select.input option { background: var(--nt-surface); color: var(--nt-text); }
+input[type="date"] { color-scheme: dark; }
+
+/* ---- 칩: Notion 다크 태그 필 ---- */
+.chip {
+  border-radius: 4px;
+  border: 0;
+  background: var(--nt-tag-gray-bg);
+  color: var(--nt-tag-gray-fg);
+  font-weight: 500;
+}
+.chip--accent { background: var(--nt-tag-blue-bg); color: var(--nt-tag-blue-fg); }
+.chip--surface { background: var(--nt-tag-gray-bg); color: var(--nt-muted); }
+
+/* ---- 탭: 하단 보더형 (Notion 데이터베이스 뷰 탭) ---- */
+.tabs { gap: 4px; border-bottom: 1px solid var(--nt-divider); padding-bottom: 0; }
+.tab {
+  border: 0;
+  border-radius: 6px 6px 0 0;
+  background: transparent;
+  color: var(--nt-muted);
+  font-weight: 500;
+  padding: 6px 10px 8px;
+  position: relative;
+}
+.tab:hover { background: var(--nt-hover); color: var(--nt-text-strong); }
+.tab[data-active="true"] { background: transparent; color: var(--nt-text-strong); font-weight: 600; }
+.tab[data-active="true"]::after {
+  content: "";
+  position: absolute;
+  left: 8px; right: 8px; bottom: -1px;
+  height: 2px;
+  background: var(--nt-text-strong);
+  border-radius: 1px;
+}
+
+/* ---- 앱 셸: 사이드바 = Notion 워크스페이스 ---- */
+.sidebar { background: var(--nt-surface); border-right: 1px solid var(--nt-divider); }
+.sidebar__brand { border-bottom: 0; }
+.brand-avatar { border-radius: 6px; }
+.brand-mark { border-radius: 6px; background: var(--nt-raised); color: var(--nt-text-strong); }
+.brand-word { color: var(--nt-text-strong); }
+.sidebar__label {
+  color: var(--nt-faint);
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  text-transform: none;
+}
+.nav-btn { padding: 6px 10px; border-radius: 6px; color: var(--nt-muted); font-weight: 500; }
+.nav-btn svg { color: var(--nt-faint); }
+.nav-btn:hover { background: var(--nt-hover); color: var(--nt-text-strong); }
+.nav-btn.is-active { background: var(--nt-active); color: var(--nt-text-strong); font-weight: 600; }
+.nav-btn.is-active svg { color: var(--nt-text-strong); }
+
+/* ---- 페이지 머리: 큰 제목 (Notion 페이지 헤더) ---- */
+.page-title { font-size: 30px; line-height: 1.25; letter-spacing: -0.01em; font-weight: 700; color: var(--nt-text-strong); }
+.page-title svg { width: 26px; height: 26px; color: var(--nt-muted); }
+.page-desc { color: var(--nt-muted); }
+.section-title { color: var(--nt-text-strong); }
+h1, h2, h3 { color: var(--nt-text-strong); }
+
+/* ---- 할 일: Notion 사각 체크박스 + 얇은 행 ---- */
+.task-check { border-radius: 4px; border-width: 1.5px; }
+.task-row { border-bottom-color: var(--nt-divider); }
+.task-section-title { border-bottom-color: var(--nt-divider); }
+
+/* ---- Drawer: Notion 사이드 피크 ---- */
+.drawer { background: var(--nt-surface); border-left: 1px solid var(--nt-divider); box-shadow: var(--nt-shadow-pop); border-radius: 0; }
+.drawer__head { border-bottom-color: var(--nt-divider); }
+.drawer-overlay { background: rgba(0, 0, 0, 0.5); }
+
+/* ---- 만다라트: 엑셀 구조 유지, 다크 파스텔 ---- */
+.mgrid { background: var(--nt-card); border-color: var(--nt-faint); }
+.mgrid-cell { background: var(--nt-card); border-color: var(--nt-divider-solid); }
+.mgrid-cell:hover { background: var(--nt-raised); }
+.mgrid-cell[data-thick-r="true"] { border-right-color: var(--nt-faint); }
+.mgrid-cell[data-thick-b="true"] { border-bottom-color: var(--nt-faint); }
+.mgrid-cell--theme { background: var(--nt-tag-orange-bg); color: var(--nt-tag-orange-fg); }
+.mgrid-cell--theme:hover { background: #6B4629; }
+.mgrid-cell--center { background: var(--nt-tag-yellow-bg); color: var(--nt-tag-yellow-fg); }
+.mgrid-cell--center:hover { background: #665033; }
+.mgrid-cell--minitheme { background: var(--nt-raised); }
+.mgrid-cell--minitheme:hover { background: #313131; }
+
+/* ---- 기타 흰 표면들 다크로 ---- */
+.diary-date { background: var(--nt-card); border-color: var(--nt-divider-solid); }
+.book-cover, .scrap-card__thumb { border-color: var(--nt-divider-solid); }
+.task-editor { background: transparent; }
+.course-tab { background: var(--nt-card); border-color: var(--nt-divider-solid); }
+:root { --surface-card: var(--nt-surface); }
+
+/* ---- 히트맵/보조 ---- */
+.heatmap__cell { border-radius: 3px; background: var(--nt-raised); }
+.collapsible summary { color: var(--nt-muted); }
+.alert--success { border-radius: 6px; background: var(--nt-tag-green-bg); color: var(--nt-tag-green-fg); border-color: transparent; }
+
+/* ---- 메모 에디터(노션 블록) 다크 ---- */
+.sx-memo { font-size: 15.5px; color: var(--nt-text); }
+.sx-memo:hover:not(:focus) { background: var(--nt-hover); }
+.sx-memo blockquote { border-left: 3px solid var(--nt-text-strong); color: var(--nt-text-soft); }
+.sx-memo pre, .sx-memo code { background: var(--nt-raised); color: var(--nt-text); }
+.sx-memo table td, .sx-memo table th { border-color: var(--nt-divider-solid); }
+.sx-memo th { background: var(--nt-raised); }
+
+/* =====================================================================
+   인터랙션: Notion 손맛
+   빠른 인 트랜지션(20ms), 부드러운 아웃, 호버 시 나타나는 컨트롤,
+   슬라이드 패널의 관성 이징
+   ===================================================================== */
+
+.btn, .nav-btn, .tab, .chip, .task-check {
+  transition: background 20ms ease-in, color 20ms ease-in, border-color 20ms ease-in, opacity 120ms ease;
+}
+.btn:active { transform: scale(0.98); }
+.btn { will-change: transform; }
+
+/* 행 전체가 호버에 반응 (Notion 블록 하이라이트) */
+.task-row {
+  border-radius: 6px;
+  margin-inline: -10px;
+  padding-inline: 10px;
+  transition: background 20ms ease-in;
+}
+.task-row:hover { background: var(--nt-hover); }
+.mgrid-cell { transition: background 20ms ease-in; }
+
+/* 슬라이드 패널: 관성 이징 + 내용 페이드업 */
+.drawer {
+  transition: transform 280ms cubic-bezier(0.32, 0.72, 0, 1);
+}
+.drawer-overlay { transition: opacity 200ms ease; }
+.drawer[data-open="true"] .drawer__body {
+  animation: nt-drawer-body 260ms cubic-bezier(0.2, 0, 0, 1) both;
+}
+@keyframes nt-drawer-body {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* 빠른 이동 팔레트 (cmd+K) */
+.qnav-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 60;
+  animation: nt-fade 120ms ease both;
+}
+.qnav {
+  position: fixed;
+  left: 50%; top: 18vh;
+  transform: translateX(-50%);
+  width: min(560px, calc(100vw - 32px));
+  background: #252525;
+  border: 1px solid var(--nt-divider);
+  border-radius: 10px;
+  box-shadow: var(--nt-shadow-pop);
+  z-index: 61;
+  overflow: hidden;
+  animation: nt-pop 160ms cubic-bezier(0.2, 0, 0, 1) both;
+}
+@keyframes nt-fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes nt-pop {
+  from { opacity: 0; transform: translateX(-50%) translateY(-8px) scale(0.98); }
+  to { opacity: 1; transform: translateX(-50%); }
+}
+.qnav__input {
+  width: 100%;
+  background: transparent;
+  border: 0;
+  outline: none;
+  color: var(--nt-text-strong);
+  font: 500 16px/1.4 var(--font-sans);
+  padding: 16px 18px 12px;
+}
+.qnav__input::placeholder { color: var(--nt-faint); }
+.qnav__list {
+  max-height: 320px;
+  overflow-y: auto;
+  padding: 6px;
+  border-top: 1px solid var(--nt-divider);
+}
+.qnav__item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 6px;
+  color: var(--nt-text);
+  font: 500 14px/1 var(--font-sans);
+  text-align: left;
+  transition: background 20ms ease-in;
+}
+.qnav__item svg { width: 16px; height: 16px; color: var(--nt-faint); }
+.qnav__item[data-selected="true"] { background: var(--nt-hover); }
+.qnav__item[data-selected="true"] svg { color: var(--nt-text-strong); }
+.qnav__hint {
+  display: flex;
+  gap: 12px;
+  padding: 8px 14px;
+  border-top: 1px solid var(--nt-divider);
+  color: var(--nt-faint);
+  font: 500 11.5px/1 var(--font-sans);
+}
+.qnav__group { color: var(--nt-faint); font: 600 11.5px/1 var(--font-sans); padding: 8px 10px 4px; }
+
+/* 사이드바 검색 버튼 (Notion 검색줄) */
+.sidebar-search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 2px 0 10px;
+  padding: 7px 10px;
+  border-radius: 6px;
+  background: var(--nt-input);
+  color: var(--nt-faint);
+  font: 500 13.5px/1 var(--font-sans);
+  cursor: pointer;
+  border: 0;
+  width: 100%;
+  transition: background 20ms ease-in;
+}
+.sidebar-search:hover { background: rgba(255, 255, 255, 0.09); color: var(--nt-muted); }
+.sidebar-search kbd {
+  margin-left: auto;
+  font: 500 11px/1 var(--font-sans);
+  color: var(--nt-faint);
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 4px;
+  padding: 3px 5px;
+}
+.sidebar-search svg { width: 15px; height: 15px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .qnav, .qnav-overlay, .drawer[data-open="true"] .drawer__body { animation: none; }
+  .btn:active { transform: none; }
+}
+
+/* ---- 모바일 상단 바 ---- */
+@media (max-width: 767px) {
+  .sidebar { background: var(--nt-surface); }
+  .sidebar-search { display: none; }
+}
+
+/* =====================================================================
+   모바일 (아이폰 15 기준): 하단 탭 바 + 시트, 안전영역, 입력 확대 방지
+   ===================================================================== */
+.mtab { display: none; }
+
+@media (max-width: 767px) {
+  /* 기존 상단 아이콘 바 제거, 하단 탭으로 대체 */
+  .sidebar { display: none; }
+  .app-main {
+    padding: calc(16px + env(safe-area-inset-top)) 16px calc(96px + env(safe-area-inset-bottom));
+  }
+  .page-title { font-size: 26px; }
+  .page-title svg { width: 22px; height: 22px; }
+
+  /* iOS 사파리 자동 확대 방지: 입력 폰트 16px 이상 */
+  .input, select.input, textarea.input, .qnav__input { font-size: 16px; }
+
+  .mtab {
+    position: fixed;
+    left: 0; right: 0; bottom: 0;
+    display: flex;
+    background: color-mix(in srgb, var(--nt-surface) 92%, transparent);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-top: 1px solid var(--nt-divider);
+    padding: 6px 8px calc(6px + env(safe-area-inset-bottom));
+    z-index: 50;
+  }
+  .mtab__item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    padding: 6px 0 4px;
+    border-radius: 8px;
+    color: var(--nt-faint);
+    font: 500 10.5px/1 var(--font-sans);
+    background: transparent;
+    border: 0;
+    transition: color 20ms ease-in, background 20ms ease-in;
+  }
+  .mtab__item svg { width: 21px; height: 21px; }
+  .mtab__item[data-active="true"] { color: var(--nt-text-strong); }
+  .mtab__item:active { background: var(--nt-hover); }
+
+  .msheet-overlay {
+    position: fixed; inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 55;
+    animation: nt-fade 140ms ease both;
+  }
+  .msheet {
+    position: absolute;
+    left: 0; right: 0;
+    bottom: calc(52px + env(safe-area-inset-bottom));
+    max-height: 70vh;
+    overflow-y: auto;
+    background: var(--nt-surface);
+    border-top: 1px solid var(--nt-divider);
+    border-radius: 14px 14px 0 0;
+    padding: 14px 14px calc(14px + 8px);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    animation: msheet-up 220ms cubic-bezier(0.32, 0.72, 0, 1) both;
+  }
+  .msheet__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px 8px;
+  }
+  @keyframes msheet-up {
+    from { transform: translateY(24px); opacity: 0; }
+    to { transform: none; opacity: 1; }
+  }
+
+  /* 팔레트를 엄지 닿는 위치로 */
+  .qnav { top: 10vh; }
+
+  /* 좁은 화면 여백 보정 */
+  .card { padding: 18px 16px; }
+  .drawer { width: 100vw !important; }
+  .drawer__body { padding: 18px 16px calc(18px + env(safe-area-inset-bottom)); }
+}

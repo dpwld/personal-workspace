@@ -1,0 +1,38 @@
+{
+  "name": "personal-workspace",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --hostname 127.0.0.1",
+    "dev:local": "WORKSPACE_LOCAL_PREVIEW=1 next dev --hostname 127.0.0.1",
+    "build": "next build",
+    "start": "next start",
+    "test": "node --test tests/*.test.mjs",
+    "typecheck": "tsc --noEmit",
+    "demo:seed": "node scripts/demo-data.mjs",
+    "demo:clean": "node scripts/demo-data.mjs --clean",
+    "demo:dev": "WORKSPACE_DEMO=1 WORKSPACE_DATA_DIR=.data next dev --hostname 127.0.0.1 --port 4317",
+    "test:integration": "node scripts/integration-test.mjs"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.112.4",
+    "lucide-react": "^1.37.0",
+    "next": "16.3.8",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "sanitize-html": "2.18.1",
+    "web-push": "^3.6.7"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@types/sanitize-html": "^2.16.2",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  },
+  "engines": {
+    "node": ">=22.13.0"
+  }
+}

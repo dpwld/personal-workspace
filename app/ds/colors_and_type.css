@@ -1,0 +1,291 @@
+/* ============================================================================
+   demodev Design System — Foundations (colors, type, radius, spacing, shadow)
+   Source: demodev-lab/design-system + demodev_Design_Kit.fig
+
+   Built on HeroUI v3 + Tailwind v4. The team publishes this as a CSS-only
+   package (@demodev-ui/react) that overrides HeroUI defaults; we mirror the
+   tokens here as plain CSS custom properties so any HTML artifact can use
+   them without depending on Tailwind.
+   ========================================================================= */
+
+/* ---------- Pretendard Variable (Korean + Latin sans) ---------- */
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.css");
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css");
+
+/* ---------- Inter (Latin numerics / English UI text in the kit) ---------- */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
+/* ---------- Hakgyoansim Allimjang (deck/cover display) — SUBSTITUTED ----
+   The Figma uses Hakgyoansim Allimjang OTF B for the lavender section
+   covers ("Color System", "Typography", etc). It is a proprietary Korean
+   pencil/marker display face by SOOSEUL with no free web license. We fall
+   back to Gamja Flower from Google Fonts — closest free Korean handwriting
+   face. Swap in the licensed font if you have it. */
+@import url("https://fonts.googleapis.com/css2?family=Gamja+Flower&display=swap");
+
+/* ---------- SF Mono ---------- (system monospace; light usage in the kit) */
+
+:root {
+  /* =====================================================================
+     COLOR — Common
+     ================================================================== */
+  --color-common-black:  #000000;          /* rgb(0,0,0)        — body fg */
+  --color-common-white:  #FFFFFF;          /* rgb(255,255,255)  — surface */
+  --color-common-gray:   #A1A1AA;          /* rgb(161,161,170)  — divider */
+
+  /* =====================================================================
+     COLOR — Gray scale (zinc-aligned, oklch in source for HDR-safe ramp)
+     ================================================================== */
+  --color-gray-50:  oklch(97.3% 0.001 287.31);  /* #FAFAFA */
+  --color-gray-100: oklch(94.0% 0.001 287.27);  /* #F4F4F5 */
+  --color-gray-200: oklch(85.2% 0.004 286.57);  /* #E4E4E7 */
+  --color-gray-300: oklch(75.8% 0.006 286.43);  /* #D4D4D8 */
+  --color-gray-400: oklch(67.2% 0.009 286.26);  /* #A1A1AA */
+  --color-gray-500: oklch(58.5% 0.011 286.14);  /* #71717A */
+  --color-gray-600: oklch(49.2% 0.013 285.97);  /* #52525B */
+  --color-gray-700: oklch(40.5% 0.013 285.83);  /* #3F3F46 */
+  --color-gray-800: oklch(31.9% 0.011 285.82);  /* #27272A */
+  --color-gray-900: oklch(22.4% 0.008 285.80);  /* #18181B */
+  --color-gray-950: oklch(17.9% 0.004 286.04);  /* #09090B */
+
+  /* =====================================================================
+     COLOR — Accent (Blue) — brand primary on consumer surfaces
+     ================================================================== */
+  --color-accent-50:    #E7F1FE;     /* soft surface, hover wash */
+  --color-accent-100:   #CEE3FD;     /* soft pressed */
+  --color-accent-300:   #3D8DF7;     /* primary hover */
+  --color-accent-500:   #1571F3;     /* primary default */
+  --color-accent-700:   #0B4899;     /* link / accent text-on-soft */
+
+  --color-accent:               var(--color-accent-500);
+  --color-accent-hover:         var(--color-accent-300);
+  --color-accent-soft:          var(--color-accent-50);
+  --color-accent-soft-hover:    var(--color-accent-100);
+  --color-accent-soft-foreground: var(--color-accent-700);
+
+  /* =====================================================================
+     COLOR — Semantic
+     ================================================================== */
+  --color-danger:                  #EF1026;
+  --color-danger-hover:            #F5475C;
+  --color-danger-soft:             #FEE8EA;
+  --color-danger-soft-hover:       #FDD1D6;
+  --color-danger-soft-foreground:  #B00C1F;
+
+  --color-success:                 #27C961;
+  --color-success-soft:            #E9FAF1;
+  --color-success-soft-foreground: #166C36;
+
+  --color-warning:                 #FFDC18;
+  --color-warning-soft:            #FFFBE1;
+  --color-warning-soft-foreground: #8A6D00;
+
+  /* extra Figma display accent (cover slabs) */
+  --color-display-lavender:        #B38AE6;
+
+  /* =====================================================================
+     COLOR — Opacity (transparent overlays on light / dark grounds)
+     ================================================================== */
+  --color-opacity-gray-50:   rgba(24, 24, 27, 0.03);
+  --color-opacity-gray-100:  rgba(24, 24, 27, 0.06);
+  --color-opacity-gray-200:  rgba(24, 24, 27, 0.10);
+  --color-opacity-gray-300:  rgba(24, 24, 27, 0.16);
+  --color-opacity-gray-400:  rgba(24, 24, 27, 0.24);
+  --color-opacity-gray-500:  rgba(24, 24, 27, 0.36);
+  --color-opacity-gray-600:  rgba(24, 24, 27, 0.50);
+  --color-opacity-gray-700:  rgba(24, 24, 27, 0.66);
+  --color-opacity-gray-800:  rgba(24, 24, 27, 0.80);
+  --color-opacity-gray-900:  rgba(24, 24, 27, 0.92);
+
+  --color-opacity-white-50:  rgba(255, 255, 255, 0.03);
+  --color-opacity-white-100: rgba(255, 255, 255, 0.06);
+  --color-opacity-white-200: rgba(255, 255, 255, 0.10);
+  --color-opacity-white-300: rgba(255, 255, 255, 0.16);
+  --color-opacity-white-400: rgba(255, 255, 255, 0.24);
+  --color-opacity-white-500: rgba(255, 255, 255, 0.36);
+  --color-opacity-white-600: rgba(255, 255, 255, 0.50);
+  --color-opacity-white-700: rgba(255, 255, 255, 0.66);
+  --color-opacity-white-800: rgba(255, 255, 255, 0.80);
+  --color-opacity-white-900: rgba(255, 255, 255, 0.92);
+
+  /* =====================================================================
+     COLOR — Semantic role tokens (use these in components)
+     ================================================================== */
+  --background:           var(--color-common-white);
+  --foreground:           var(--color-common-black);
+  --foreground-muted:     var(--color-gray-500);
+  --foreground-subtle:    var(--color-gray-400);
+  --border:               var(--color-gray-200);
+  --border-strong:        var(--color-gray-300);
+  --surface:              var(--color-common-white);
+  --surface-elevated:     var(--color-common-white);
+  --surface-muted:        var(--color-gray-50);
+  --surface-subtle:       var(--color-gray-100);
+
+  /* =====================================================================
+     TYPOGRAPHY — families
+     ================================================================== */
+  --font-sans: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont,
+               "Apple SD Gothic Neo", "Malgun Gothic", Inter, "Helvetica Neue",
+               "Segoe UI", Roboto, sans-serif;
+  --font-en:   Inter, "Pretendard Variable", system-ui, sans-serif;
+  --font-display: "Gamja Flower", "Hakgyoansim Allimjang OTF",
+                  "Pretendard Variable", system-ui, sans-serif;
+  --font-mono: "SF Mono", "JetBrains Mono", Menlo, Monaco, ui-monospace, monospace;
+
+  /* =====================================================================
+     TYPOGRAPHY — scale (size / line-height / tracking)
+     Conventions in the Figma:
+       • Display weight=700 (Bold), line-height 120%, tracking -1.7%
+       • Heading weight=700 (Bold), line-height 130%, tracking -1.0% to -2%
+       • Body weight=500/600/700 (Med/SB/Bold), line-height 150%
+       • Caption weight=500/600 (Med/SB), line-height 130%–140%, tracking -1%
+     ================================================================== */
+  --text-display-01: 80px;
+  --text-display-02: 64px;
+  --text-display-03: 48px;
+  --text-display-04: 40px;
+
+  --text-heading-01: 32px;
+  --text-heading-02: 28px;
+  --text-heading-03: 24px;
+  --text-heading-04: 22px;
+  --text-heading-05: 20px;
+
+  --text-body-01: 18px;
+  --text-body-02: 16px;
+  --text-body-03: 14px;
+
+  --text-caption-01: 12px;
+  --text-caption-02: 10px;
+
+  --leading-display: 1.20;
+  --leading-heading: 1.30;
+  --leading-body:    1.50;
+  --leading-caption: 1.30;
+
+  --tracking-display: -0.017em; /* -1.7% */
+  --tracking-heading: -0.01em;
+  --tracking-body:    -0.01em;
+  --tracking-caption: -0.01em;
+
+  --weight-regular: 400;
+  --weight-medium:  500;
+  --weight-semibold: 600;
+  --weight-bold:    700;
+
+  /* =====================================================================
+     RADIUS — 4px-step base, with a couple of half-step exceptions
+     ================================================================== */
+  --radius-xs: 2px;
+  --radius-sm: 4px;     /* rounded-sm */
+  --radius-md: 6px;     /* rounded-md  → chip-sm, button-xs */
+  --radius-lg: 8px;     /* rounded-lg  → button-sm, chip-md */
+  --radius-lg-plus: 10px; /* button-md  */
+  --radius-xl: 12px;    /* button-lg, input-lg, list-box */
+  --radius-2xl: 16px;   /* card */
+  --radius-2xl-plus: 20px;
+  --radius-3xl: 24px;   /* large card / image */
+  --radius-4xl: 32px;
+  --radius-pill: 9999px;
+
+  /* component-bound radii (mirror the React package) */
+  --radius-button-xs: var(--radius-md);
+  --radius-button-sm: var(--radius-lg);
+  --radius-button-md: var(--radius-lg-plus);
+  --radius-button-lg: var(--radius-xl);
+  --radius-chip-sm:   var(--radius-md);
+  --radius-chip-md:   var(--radius-lg);
+  --radius-chip-lg:   var(--radius-button-sm);
+  --radius-input-lg:  var(--radius-button-lg);
+  --radius-list-box:  var(--radius-xl);
+  --radius-toast:     var(--radius-2xl);
+
+  /* =====================================================================
+     SPACING — 4-multiple base; 2px allowed for visual correction, 1px last resort
+     ================================================================== */
+  --space-0:  0;
+  --space-1:  2px;
+  --space-2:  4px;
+  --space-3:  6px;
+  --space-4:  8px;
+  --space-5:  10px;
+  --space-6:  12px;
+  --space-7:  14px;
+  --space-8:  16px;
+  --space-10: 20px;
+  --space-12: 24px;
+  --space-16: 32px;
+  --space-20: 40px;
+  --space-24: 48px;
+  --space-28: 56px;
+  --space-32: 64px;
+  --space-36: 72px;
+  --space-40: 80px;
+
+  /* component heights */
+  --h-button-sm: 36px;
+  --h-button-md: 40px;
+  --h-button-lg: 48px;
+  --h-chip-sm:   24px;
+  --h-chip-md:   32px;
+  --h-chip-lg:   36px;
+  --h-input-lg:  48px;
+
+  /* =====================================================================
+     SHADOW — referenced from Tailwind UI; soft, mostly 0.04–0.10 alpha
+     ================================================================== */
+  --shadow-xs:  0 1px 2px 0 rgba(0, 0, 0, 0.04);
+  --shadow-sm:  0 1px 3px 0 rgba(0, 0, 0, 0.06), 0 1px 2px -1px rgba(0, 0, 0, 0.06);
+  --shadow-md:  0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
+  --shadow-lg:  0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.06);
+  --shadow-xl:  0 20px 25px -5px rgba(0, 0, 0, 0.10), 0 8px 10px -6px rgba(0, 0, 0, 0.06);
+  --shadow-overlay: 0 25px 50px -12px rgba(152, 152, 152, 0.25);
+
+  /* =====================================================================
+     MOTION — used sparingly; mostly opacity + bg + transform
+     ================================================================== */
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-emphasized: cubic-bezier(0.2, 0, 0, 1);
+  --duration-fast: 120ms;
+  --duration-base: 180ms;
+  --duration-slow: 260ms;
+}
+
+/* ============================================================================
+   SEMANTIC TEXT STYLES — apply directly with class names
+   ========================================================================= */
+html { font-family: var(--font-sans); color: var(--foreground); background: var(--background); }
+body { margin: 0; font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
+
+/* Base typography must not override each screen’s Tailwind size and spacing utilities. */
+@layer base {
+.display-01, h1.display, .h-display { font: var(--weight-bold) var(--text-display-01)/var(--leading-display) var(--font-sans); letter-spacing: var(--tracking-display); }
+.display-02 { font: var(--weight-bold) var(--text-display-02)/var(--leading-display) var(--font-sans); letter-spacing: var(--tracking-display); }
+.display-03 { font: var(--weight-bold) var(--text-display-03)/var(--leading-display) var(--font-sans); letter-spacing: var(--tracking-display); }
+.display-04 { font: var(--weight-bold) var(--text-display-04)/var(--leading-display) var(--font-sans); letter-spacing: var(--tracking-display); }
+
+.heading-01, h1 { font: var(--weight-bold) var(--text-heading-01)/var(--leading-heading) var(--font-sans); letter-spacing: var(--tracking-heading); margin: 0; }
+.heading-02, h2 { font: var(--weight-bold) var(--text-heading-02)/var(--leading-heading) var(--font-sans); letter-spacing: var(--tracking-heading); margin: 0; }
+.heading-03, h3 { font: var(--weight-bold) var(--text-heading-03)/var(--leading-heading) var(--font-sans); letter-spacing: var(--tracking-heading); margin: 0; }
+.heading-04, h4 { font: var(--weight-bold) var(--text-heading-04)/var(--leading-heading) var(--font-sans); letter-spacing: var(--tracking-heading); margin: 0; }
+.heading-05, h5 { font: var(--weight-bold) var(--text-heading-05)/var(--leading-heading) var(--font-sans); letter-spacing: var(--tracking-heading); margin: 0; }
+
+.body-01, p.body-01 { font: var(--weight-medium) var(--text-body-01)/var(--leading-body) var(--font-sans); letter-spacing: var(--tracking-body); }
+.body-02, p     { font: var(--weight-medium) var(--text-body-02)/var(--leading-body) var(--font-sans); letter-spacing: var(--tracking-body); margin: 0; }
+.body-03        { font: var(--weight-medium) var(--text-body-03)/var(--leading-body) var(--font-sans); letter-spacing: var(--tracking-body); }
+
+.caption-01     { font: var(--weight-semibold) var(--text-caption-01)/var(--leading-caption) var(--font-sans); letter-spacing: var(--tracking-caption); }
+.caption-02     { font: var(--weight-medium) var(--text-caption-02)/var(--leading-caption) var(--font-sans); letter-spacing: var(--tracking-caption); }
+
+}
+
+.font-display { font-family: var(--font-display); }
+.font-mono    { font-family: var(--font-mono); }
+
+.text-muted   { color: var(--foreground-muted); }
+.text-subtle  { color: var(--foreground-subtle); }
+.text-accent  { color: var(--color-accent); }
+.text-danger  { color: var(--color-danger); }
+.text-success { color: var(--color-success); }
+.text-warning { color: var(--color-warning-soft-foreground); }

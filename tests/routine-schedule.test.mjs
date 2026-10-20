@@ -1,0 +1,18 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { routinesForDate } from '../lib/routine-schedule.mjs';
+const routines = ['shared', 'work', 'buddy', 'library', 'rest'].map(id => ({ id }));
+const schedule = { startsOn: '2026-09-24', days: { work: [1,2,3,4,5], buddy: [0,6], library: [6], rest: [0] }, newIds: ['buddy','library','rest'] };
+const ids = date => routinesForDate(routines, date, schedule).map(r => r.id);
+test('Friday contains shared and weekday routines', () => assert.deepEqual(ids('2026-09-25'), ['shared','work']));
+test('Saturday includes library and buddy work', () => assert.deepEqual(ids('2026-09-26'), ['shared','buddy','library']));
+test('Sunday includes rest instead of library', () => assert.deepEqual(ids('2026-09-27'), ['shared','buddy','rest']));
+test('Previous weekends do not gain new routine rows', () => assert.deepEqual(ids('2026-09-20'), ['shared','work']));
+test('History can resolve all routine IDs without date filtering', () => assert.deepEqual(routinesForDate(routines, undefined, schedule), routines));
+const holidayRoutines = [...routines, { id: 'career' }];
+const holidaySchedule = { ...schedule, holidayIds: ['career'], holidaySharedIds: ['shared'], newIds: [...schedule.newIds, 'career'] };
+test('Holiday overrides weekday work', () => assert.deepEqual(routinesForDate(holidayRoutines, '2026-09-25', holidaySchedule).map(r=>r.id), ['shared','career']));
+test('Holiday overrides Saturday buddy work and library', () => assert.deepEqual(routinesForDate(holidayRoutines, '2026-09-26', holidaySchedule).map(r=>r.id), ['shared','career']));
+test('Substitute holiday uses holiday schedule', () => assert.deepEqual(routinesForDate(holidayRoutines, '2026-10-05', holidaySchedule).map(r=>r.id), ['shared','career']));
+test('Ordinary Sunday remains weekend schedule', () => assert.deepEqual(routinesForDate(holidayRoutines, '2026-09-27', holidaySchedule).map(r=>r.id), ['shared','buddy','rest']));
+test('2027 holiday uses the same schedule', () => assert.deepEqual(routinesForDate(holidayRoutines, '2027-02-09', holidaySchedule).map(r=>r.id), ['shared','career']));

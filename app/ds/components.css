@@ -1,0 +1,257 @@
+/* ============================================================================
+   demodev components — pure CSS recreation of @demodev-ui/react on HeroUI v3.
+   Use with colors_and_type.css. Mirrors the styling rules in
+   source/react/*.css but doesn't depend on Tailwind.
+   ========================================================================= */
+
+/* ---- Button -------------------------------------------------------- */
+.btn {
+  --bg: var(--color-accent);
+  --bg-hover: var(--color-accent-hover);
+  --bg-pressed: var(--color-accent-hover);
+  --fg: var(--color-common-white);
+  --border-color: transparent;
+  display: inline-flex; align-items: center; justify-content: center;
+  gap: 8px;
+  font-family: var(--font-sans); font-weight: 700;
+  border: 1px solid var(--border-color);
+  background: var(--bg); color: var(--fg);
+  cursor: pointer;
+  transition: background var(--duration-base) var(--ease-standard),
+              color var(--duration-base) var(--ease-standard),
+              border-color var(--duration-base) var(--ease-standard),
+              opacity var(--duration-base) var(--ease-standard);
+  outline: 0;
+  white-space: nowrap;
+}
+.btn:hover    { background: var(--bg-hover); }
+.btn:active   { background: var(--bg-pressed); }
+.btn:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
+.btn:disabled, .btn[aria-disabled="true"] { opacity: 0.5; cursor: not-allowed; }
+
+.btn--sm { height: 36px; padding: 0 12px; border-radius: var(--radius-button-sm); font-size: 14px; }
+.btn--md { height: 40px; padding: 0 16px; border-radius: var(--radius-button-md); font-size: 14px; }
+.btn--lg { height: 48px; padding: 0 24px; border-radius: var(--radius-button-lg); font-size: 16px; gap: 12px; }
+.btn--icon-only { padding: 0; aspect-ratio: 1/1; width: var(--btn-h, 40px); }
+
+.btn--primary { /* uses defaults */ }
+.btn--secondary {
+  --bg: var(--color-accent-soft);
+  --bg-hover: var(--color-accent-soft-hover);
+  --bg-pressed: var(--color-accent-soft-hover);
+  --fg: var(--color-accent-soft-foreground);
+}
+.btn--tertiary {
+  --bg: var(--color-gray-100);
+  --bg-hover: var(--color-gray-200);
+  --bg-pressed: var(--color-gray-200);
+  --fg: var(--color-common-black);
+}
+.btn--danger {
+  --bg: var(--color-danger);
+  --bg-hover: var(--color-danger-hover);
+  --bg-pressed: var(--color-danger-hover);
+  --fg: var(--color-common-white);
+}
+.btn--danger-soft {
+  --bg: var(--color-danger-soft);
+  --bg-hover: var(--color-danger-soft-hover);
+  --bg-pressed: var(--color-danger-soft-hover);
+  --fg: var(--color-danger-soft-foreground);
+}
+.btn--outline {
+  --bg: var(--color-common-white);
+  --bg-hover: var(--color-gray-50);
+  --bg-pressed: var(--color-gray-100);
+  --fg: var(--color-common-black);
+  --border-color: var(--color-gray-200);
+}
+.btn--ghost {
+  --bg: transparent;
+  --bg-hover: var(--color-gray-100);
+  --bg-pressed: var(--color-gray-200);
+  --fg: var(--color-common-black);
+}
+.btn--outline[data-color="accent"]  { --border-color: var(--color-accent); --fg: var(--color-accent-soft-foreground); --bg-hover: var(--color-accent-soft); --bg-pressed: var(--color-accent-soft-hover); }
+.btn--outline[data-color="danger"]  { --border-color: var(--color-danger);  --fg: var(--color-danger-soft-foreground);  --bg-hover: var(--color-danger-soft);  --bg-pressed: var(--color-danger-soft-hover); }
+.btn--outline[data-color="success"] { --border-color: var(--color-success); --fg: var(--color-success-soft-foreground); --bg-hover: var(--color-success-soft); }
+.btn--outline[data-color="warning"] { --border-color: var(--color-warning); --fg: var(--color-warning-soft-foreground); --bg-hover: var(--color-warning-soft); }
+
+/* ---- Input --------------------------------------------------------- */
+.input {
+  display: inline-flex; align-items: center; gap: 8px;
+  height: var(--h-input-lg); padding: 0 16px;
+  border-radius: var(--radius-input-lg);
+  background: var(--color-common-white);
+  border: 1px solid var(--color-gray-200);
+  font: 500 16px/1 var(--font-sans);
+  color: var(--foreground);
+  transition: border-color var(--duration-base) var(--ease-standard),
+              box-shadow var(--duration-base) var(--ease-standard);
+  outline: 0;
+  width: 100%; box-sizing: border-box;
+}
+.input::placeholder { color: var(--foreground-subtle); font-weight: 500; }
+.input:hover { border-color: var(--color-gray-300); }
+.input:focus, .input:focus-within { border-color: var(--color-accent); box-shadow: 0 0 0 3px var(--color-accent-soft); }
+.input--disabled, .input[disabled] { background: var(--color-gray-50); color: var(--foreground-subtle); cursor: not-allowed; }
+.input--secondary { background: var(--color-gray-50); border-color: transparent; }
+.input--error { border-color: var(--color-danger); box-shadow: 0 0 0 3px var(--color-danger-soft); }
+
+/* ---- Field wrapper ------------------------------------------------- */
+.field { display: flex; flex-direction: column; gap: 6px; }
+.field-label { font: 600 14px/1.3 var(--font-sans); letter-spacing: -.01em; color: var(--foreground); }
+.field-desc { font: 500 12px/1.4 var(--font-sans); color: var(--foreground-muted); }
+.field-desc--error { color: var(--color-danger); }
+.field-required::after { content: " *"; color: var(--color-danger); }
+
+/* ---- Chip / Tag ---------------------------------------------------- */
+.chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  height: 32px; padding: 0 10px;
+  border-radius: var(--radius-chip-md);
+  font: 700 14px/1 var(--font-sans);
+  background: var(--color-gray-100); color: var(--foreground);
+}
+.chip--sm { height: 24px; padding: 0 8px; font-size: 12px; border-radius: var(--radius-chip-sm); gap: 4px; }
+.chip--lg { height: 36px; padding: 0 12px; font-size: 14px; border-radius: var(--radius-chip-lg); }
+
+.chip--accent  { background: var(--color-accent-soft);  color: var(--color-accent-soft-foreground); }
+.chip--success { background: var(--color-success-soft); color: var(--color-success-soft-foreground); }
+.chip--warning { background: var(--color-warning-soft); color: var(--color-warning-soft-foreground); }
+.chip--danger  { background: var(--color-danger-soft);  color: var(--color-danger-soft-foreground); }
+
+.chip--surface { background: transparent; border: 1px solid var(--color-gray-200); }
+
+/* ---- Card ---------------------------------------------------------- */
+.card {
+  background: var(--color-common-white);
+  border: 1px solid var(--color-gray-200);
+  border-radius: var(--radius-2xl);
+  padding: 24px;
+  box-shadow: var(--shadow-sm);
+}
+
+/* ---- Alert --------------------------------------------------------- */
+.alert {
+  display: flex; gap: 12px;
+  padding: 16px;
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--color-gray-200);
+  background: var(--color-common-white);
+  align-items: flex-start;
+}
+.alert__indicator {
+  width: 20px; height: 20px; flex: none;
+  border-radius: 9999px;
+  display: inline-flex; align-items: center; justify-content: center;
+  font: 700 12px/1 var(--font-sans); color: #fff;
+  margin-top: 2px;
+}
+.alert__title { font: 700 14px/1.3 var(--font-sans); letter-spacing: -.01em; margin: 0; }
+.alert__desc  { font: 500 13px/1.5 var(--font-sans); color: var(--foreground-muted); margin: 4px 0 0 0; }
+.alert--accent  { background: var(--color-accent-soft);  border-color: transparent; }
+.alert--accent  .alert__indicator { background: var(--color-accent); }
+.alert--success { background: var(--color-success-soft); border-color: transparent; }
+.alert--success .alert__indicator { background: var(--color-success); }
+.alert--warning { background: var(--color-warning-soft); border-color: transparent; }
+.alert--warning .alert__indicator { background: #C29B00; }
+.alert--danger  { background: var(--color-danger-soft);  border-color: transparent; }
+.alert--danger  .alert__indicator { background: var(--color-danger); }
+
+/* ---- Checkbox / Radio --------------------------------------------- */
+.checkbox, .radio { display: inline-flex; gap: 8px; align-items: center; cursor: pointer; user-select: none; }
+.checkbox__box, .radio__box {
+  width: 18px; height: 18px; flex: none;
+  border: 1px solid var(--color-gray-300);
+  background: var(--color-common-white);
+  display: inline-flex; align-items: center; justify-content: center;
+  color: #fff; font: 700 12px/1 var(--font-sans);
+  transition: background var(--duration-base) var(--ease-standard),
+              border-color var(--duration-base) var(--ease-standard);
+}
+.checkbox__box { border-radius: var(--radius-xs); }
+.radio__box    { border-radius: 9999px; }
+.checkbox[data-checked="true"] .checkbox__box,
+.radio[data-checked="true"]    .radio__box {
+  background: var(--color-accent); border-color: var(--color-accent);
+}
+.radio[data-checked="true"] .radio__box::after {
+  content: ""; width: 6px; height: 6px; border-radius: 9999px; background: #fff;
+}
+.checkbox__label, .radio__label { font: 600 14px/1.3 var(--font-sans); color: var(--foreground); }
+
+/* ---- Switch -------------------------------------------------------- */
+.switch {
+  width: 36px; height: 20px; border-radius: 9999px;
+  background: var(--color-gray-300);
+  position: relative; cursor: pointer; flex: none;
+  transition: background var(--duration-base) var(--ease-standard);
+  border: 0; padding: 0;
+}
+.switch::after {
+  content: ""; position: absolute; top: 2px; left: 2px;
+  width: 16px; height: 16px; border-radius: 9999px;
+  background: #fff; box-shadow: var(--shadow-sm);
+  transition: transform var(--duration-base) var(--ease-standard);
+}
+.switch[data-checked="true"] { background: var(--color-accent); }
+.switch[data-checked="true"]::after { transform: translateX(16px); }
+
+/* ---- Tabs ---------------------------------------------------------- */
+.tabs {
+  display: inline-flex; gap: 0;
+  border-bottom: 1px solid var(--color-gray-200);
+}
+.tab {
+  font: 700 14px/1 var(--font-sans); letter-spacing: -.01em;
+  padding: 12px 16px; color: var(--foreground-muted);
+  background: transparent; border: 0; border-bottom: 2px solid transparent;
+  cursor: pointer;
+  transition: color var(--duration-base) var(--ease-standard),
+              border-color var(--duration-base) var(--ease-standard);
+  margin-bottom: -1px;
+}
+.tab:hover { color: var(--foreground); }
+.tab[data-active="true"] { color: var(--color-accent); border-bottom-color: var(--color-accent); }
+
+/* ---- Toast --------------------------------------------------------- */
+.toast {
+  display: flex; gap: 12px; align-items: flex-start;
+  padding: 14px 16px;
+  border-radius: var(--radius-toast);
+  background: var(--color-common-white);
+  box-shadow: var(--shadow-overlay);
+  border: 1px solid var(--color-gray-200);
+  min-width: 280px;
+}
+
+/* ---- Tooltip ------------------------------------------------------- */
+.tooltip {
+  display: inline-block; padding: 6px 10px;
+  background: var(--color-gray-900); color: #fff;
+  font: 600 12px/1.3 var(--font-sans);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+}
+
+/* ---- Avatar -------------------------------------------------------- */
+.avatar {
+  width: 40px; height: 40px; border-radius: 9999px;
+  background: var(--color-gray-100); color: var(--foreground);
+  display: inline-flex; align-items: center; justify-content: center;
+  font: 700 14px/1 var(--font-sans); letter-spacing: -.01em;
+  overflow: hidden; flex: none;
+  border: 1px solid var(--color-opacity-gray-100);
+}
+
+/* ---- Divider ------------------------------------------------------- */
+.divider { border: 0; border-top: 1px solid var(--color-gray-200); margin: 0; }
+
+/* ---- Link ---------------------------------------------------------- */
+.link {
+  color: var(--color-accent); font-weight: 600;
+  text-decoration: none; text-underline-offset: 3px;
+  transition: color var(--duration-base) var(--ease-standard);
+}
+.link:hover { color: var(--color-accent-hover); text-decoration: underline; }

@@ -189,4 +189,4 @@ Bug reports should describe the screen, steps to reproduce, expected result, and
 
 ## License
 
-A project license has not yet been selected. No general reuse license is granted by this repository at this time. Third-party packages and assets remain subject to their respective licenses.
+Licensed under the [MIT License](LICENSE). You may use, modify, and redistribute this project, including commercially, provided you retain the copyright and permission notices. Third-party packages and assets remain subject to their respective licenses.
